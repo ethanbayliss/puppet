@@ -29,8 +29,9 @@ package { 'git':
 #git config --global --unset core.autocrlf
 #java -jar BuildTools.jar --rev latest
 
+#in older versions of puppet, require was necessary, however in newer versions this is for the most part deprecated since puppet files are executed sequentially
 service { 'spigot':
   ensure => running,
   enable => true,
-  require => #
+  require => [Package['git'], File['/opt/spigot/eula.txt']]
 }
